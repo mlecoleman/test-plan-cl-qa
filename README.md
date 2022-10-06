@@ -1,2 +1,2 @@
 # test-plan-cl-qa
-Test Plan for https://demoqa.com/books
+Knowledge Check Test Plan for https://demoqa.com/books - Code Louisville Fall 2022 QA Course 1
