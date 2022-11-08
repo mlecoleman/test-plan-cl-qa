@@ -13,10 +13,13 @@
         public double Mileage => _mileage;
         #endregion
 
+        #region Public Fields
+        public bool HasFlatTire;
+        #endregion
+
         #region Private Fields
         private double _gasRemaining;
         private double _mileage;
-        private bool _hasFlatTire;
         #endregion
 
         #region Private Properties
@@ -70,7 +73,7 @@
             {
                 statusString = "Cannot drive, out of gas.";
             }
-            else if (_hasFlatTire)
+            else if (HasFlatTire)
             {
                 statusString = "Cannot drive due to flat tire.";
             }
@@ -98,7 +101,7 @@
                 bool gotFlat = GotFlatTire(miles);
                 if(gotFlat)
                 {
-                    _hasFlatTire = true;
+                    HasFlatTire = true;
                     statusString += " Oh no! Got a flat tire!";
                 }
             }
@@ -107,12 +110,12 @@
 
         protected async Task ChangeTireAsync()
         {
-            if (!_hasFlatTire)
+            if (!HasFlatTire)
                 throw new NoTireToChangeException();
             else
             {
                 await Task.Delay(1000);
-                _hasFlatTire = false;
+                HasFlatTire = false;
             }
         }
 

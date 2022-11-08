@@ -125,9 +125,9 @@ namespace CodeLouisvilleUnitTestProjectTests
          * individual Fact tests, test the following functionality of the 
          * Drive method:
          *      a. Attempting to drive a car without gas returns the status 
-         *      string “Cannot drive, out of gas.”.
+         *      string ï¿½Cannot drive, out of gas.ï¿½.
          *      b. Attempting to drive a car with a flat tire returns 
-         *      the status string “Cannot drive due to flat tire.”.
+         *      the status string ï¿½Cannot drive due to flat tire.ï¿½.
          *      c. Drive the car 10 miles. Verify that the correct amount 
          *      of gas was used, that the correct distance was traveled, 
          *      that GasLevel is correct, that MilesRemaining is correct, 
