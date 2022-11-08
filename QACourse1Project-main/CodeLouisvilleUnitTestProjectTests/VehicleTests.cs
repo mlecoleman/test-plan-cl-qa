@@ -86,26 +86,38 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddingTooMuchGasThrowsGasOverflowException()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle waynesCar = new Vehicle (4, 21, "AMC", "Pacer", 18);
+            
             //act
+            // Assert.Throws<GasOverfillException>(() => waynesCar.AddGas(22));
 
+            // waynesCar.AddGas(22).Should().Throw<GasOverfillException>();
+            Action action = () => waynesCar.AddGas(22);
+            
             //assert
-
-        }
+            action.Should().Throw<GasOverfillException>();
+        }   
 
         //Using a Theory (or data-driven test), verify that the GasLevel
         //property returns the correct percentage when the gas level is
         //at 0%, 25%, 50%, 75%, and 100%.
         [Theory]
-        [InlineData("MysteryParamValue")]
-        public void GasLevelPercentageIsCorrectForAmountOfGas(params object[] yourParamsHere)
+        [InlineData("0%", 0)]
+        [InlineData("25%", 2.5)]
+        [InlineData("50%", 5)]
+        [InlineData("75%", 7.5)]
+        [InlineData("100%", 10)]
+        // [InlineData("MysteryParamValue")]
+        public void GasLevelPercentageIsCorrectForAmountOfGas(string percentGasInTank, float gasToAdd)
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle (4, 10, "Toyota", "Camry", 30);
+
             //act
+            vehicle.AddGas(gasToAdd);
 
             //assert
-
+            vehicle.GasLevel.Should().Be(percentGasInTank);
         }
 
         /*
