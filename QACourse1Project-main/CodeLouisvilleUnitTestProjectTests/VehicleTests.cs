@@ -36,11 +36,18 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleConstructorTest()
         {
             //arrange
-            throw new NotImplementedException();
             //act
+            Vehicle tricycle = new Vehicle(3, 0, "Radio", "Flyer", 0);
 
             //assert
-
+            using (new AssertionScope())
+            {
+            tricycle.NumberOfTires.Should().Be(3);
+            tricycle.GasTankCapacity.Should().Be(0);
+            tricycle.Make.Should().Be("Radio");
+            tricycle.Model.Should().Be("Flyer");
+            tricycle.MilesPerGallon.Should().Be(0);
+            }
         }
 
         //Verify that the parameterless AddGas method fills the gas tank
