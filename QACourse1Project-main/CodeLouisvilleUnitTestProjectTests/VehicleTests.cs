@@ -15,11 +15,18 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleParameterlessConstructorTest()
         {
             //arrange
-            throw new NotImplementedException();
             //act
-
+            Vehicle vehicle = new Vehicle();
+            
             //assert
-
+            using (new AssertionScope())
+            {
+            vehicle.NumberOfTires.Should().Be(0);
+            vehicle.GasTankCapacity.Should().Be(0);
+            vehicle.Make.Should().Be("");
+            vehicle.Model.Should().Be("");
+            vehicle.MilesPerGallon.Should().Be(0);
+            }
         }
 
         //Verify the parameterized constructor successfully creates a new
