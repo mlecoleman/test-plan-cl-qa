@@ -71,11 +71,13 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddGasWithParameterAddsSuppliedAmountOfGas()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle trike = new Vehicle (3, 6, "Harley", "Freewheeler", 33);
+
             //act
+            trike.AddGas(3);
 
             //assert
-
+            trike.GasLevel.Should().Be("50%");
         }
 
         //Verify that the AddGas method with a parameter will throw
