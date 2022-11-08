@@ -56,11 +56,13 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void AddGasParameterlessFillsGasToMax()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle mower = new Vehicle (4, 2.4, "John Deere", "S100", 6);
+
             //act
+            mower.AddGas();
 
             //assert
-
+            mower.GasLevel.Should().Be("100%");
         }
 
         //Verify that the AddGas method with a parameter adds the
