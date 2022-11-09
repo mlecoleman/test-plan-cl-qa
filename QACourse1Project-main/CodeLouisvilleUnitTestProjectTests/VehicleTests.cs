@@ -89,13 +89,11 @@ namespace CodeLouisvilleUnitTestProjectTests
             Vehicle waynesCar = new Vehicle (4, 21, "AMC", "Pacer", 18);
             
             //act
-            // Assert.Throws<GasOverfillException>(() => waynesCar.AddGas(22));
-
-            // waynesCar.AddGas(22).Should().Throw<GasOverfillException>();
             Action action = () => waynesCar.AddGas(22);
             
             //assert
-            action.Should().Throw<GasOverfillException>();
+            action.Should().Throw<GasOverfillException>()
+                  .WithMessage("Unable to add 22 gallons to tank because it would exceed the capacity of 21 gallons");
         }   
 
         //Using a Theory (or data-driven test), verify that the GasLevel
