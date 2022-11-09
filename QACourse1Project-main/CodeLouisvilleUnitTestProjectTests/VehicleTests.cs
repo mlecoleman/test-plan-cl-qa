@@ -157,31 +157,22 @@ namespace CodeLouisvilleUnitTestProjectTests
             
         }
         [Theory]
-        [InlineData(10, 100, "Drove 10 miles using 10 gallons of gas.", false, "90%")]
-        public void DriveTenMiles(double miles, float gasToAdd, string statusString, string percentGasInTank)
+        [InlineData(10, 100, "Drove 10 miles using 10 gallons of gas.", "90%", 90, 10)]
+        [InlineData(100, 100, "Drove 100 miles, then ran out of gas.", "0%", 0, 100)]
+        public void DrivePositiveTests(double miles, float gasToAdd, string statusString, string percentGasInTank, double milesRemaining, double totalMileage)
         {
             //arrange
             Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
-            vehicle.HasFlatTire = true;
 
+            //act
             vehicle.AddGas(gasToAdd);
 
             //assert
             vehicle.Drive(miles).Should().Be(statusString);
             vehicle.GasLevel.Should().Be(percentGasInTank);
+            vehicle.MilesRemaining.Should().Be(milesRemaining);
+            vehicle.Mileage.Should().Be(totalMileage);
         }
-        [Theory]
-        [InlineData("MysteryParamValue")]
-        public void DrivePositiveTests(params object[] yourParamsHere)
-        {
-            //arrange
-            throw new NotImplementedException();
-            //act
-
-            //assert
-
-        }
-
         //Verify that attempting to change a flat tire using
         //ChangeTireAsync will throw a NoTireToChangeException
         //if there is no flat tire.
