@@ -108,7 +108,7 @@
             return statusString;
         }
 
-        protected async Task ChangeTireAsync()
+        public async Task ChangeTireAsync()
         {
             if (!HasFlatTire)
                 throw new NoTireToChangeException();
