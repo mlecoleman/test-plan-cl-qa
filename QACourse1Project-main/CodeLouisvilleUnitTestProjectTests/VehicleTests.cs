@@ -178,11 +178,13 @@ namespace CodeLouisvilleUnitTestProjectTests
         public async Task ChangeTireWithoutFlatTest()
         {
             //arrange
-            throw new NotImplementedException();
+            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
+        
             //act
-
             //assert
-
+            Func<Task> act = async () => { await vehicle.ChangeTireAsync(); };
+            await act.Should().ThrowAsync<NoTireToChangeException>()
+                     .WithMessage("No flat tire to change");
         }
 
         //Verify that ChangeTireAsync can successfully
