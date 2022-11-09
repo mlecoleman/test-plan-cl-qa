@@ -143,17 +143,33 @@ namespace CodeLouisvilleUnitTestProjectTests
          *      correct. Verify that the status reports the car is out of gas.
         */
         [Theory]
-        [InlineData("MysteryParamValue")]
-        public void DriveNegativeTests(params object[] yourParamsHere)
+        [InlineData(1, 0, "Cannot drive, out of gas.", false)]
+        [InlineData(1, 5, "Cannot drive due to flat tire.", true)]
+        public void DriveNegativeTests(double miles, float gasToAdd, string statusString, bool HasFlatTire)
         {
             //arrange
-            throw new NotImplementedException();
-            //act
+            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
+            vehicle.AddGas(gasToAdd);
+            vehicle.HasFlatTire = true;
 
             //assert
-
+            vehicle.Drive(miles).Should().Be(statusString);
+            
         }
+        [Theory]
+        [InlineData(10, 100, "Drove 10 miles using 10 gallons of gas.", false, "90%")]
+        public void DriveTenMiles(double miles, float gasToAdd, string statusString, string percentGasInTank)
+        {
+            //arrange
+            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
+            vehicle.HasFlatTire = true;
 
+            vehicle.AddGas(gasToAdd);
+
+            //assert
+            vehicle.Drive(miles).Should().Be(statusString);
+            vehicle.GasLevel.Should().Be(percentGasInTank);
+        }
         [Theory]
         [InlineData("MysteryParamValue")]
         public void DrivePositiveTests(params object[] yourParamsHere)
