@@ -1,16 +1,21 @@
-﻿namespace CodeLouisvilleUnitTestProject
+﻿using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace CodeLouisvilleUnitTestProject
 {
     public class SemiTruck : Vehicle
     {
         public List<CargoItem> Cargo { get; private set; }
+
 
         /// <summary>
         /// Creates a new SemiTruck that always has 18 Tires
         /// </summary>
         public SemiTruck()
         {
-            //YOUR CODE HERE: 
-            throw new NotImplementedException();
+           NumberOfTires = 18;
+           Cargo = new List<CargoItem>();
         }
 
         /// <summary>
@@ -19,8 +24,7 @@
         /// <param name="item">The CargoItem to add</param>
         public void LoadCargo(CargoItem item)
         {
-            //YOUR CODE HERE
-            throw new NotImplementedException();
+            Cargo.Add(item);
         }
             
         /// <summary>
@@ -31,7 +35,7 @@
         /// <exception cref="ArgumentException">Thrown if no CargoItem in the Cargo matches the passed name</exception>
         public CargoItem UnloadCargo(string name)
         {
-            //YOUR CODE HERE
+            /// Longest method
             throw new NotImplementedException();
         }
 
@@ -42,7 +46,7 @@
         /// <returns>A List of CargoItems with the exact name passed</returns>
         public List<CargoItem> GetCargoItemsByName(string name)
         {
-            //YOUR CODE HERE
+            //YOUR CODE HERE Need a library for dealing with list
             throw new NotImplementedException();
         }
 
@@ -53,7 +57,7 @@
         /// <returns>A List of CargoItems with a description containing the passed description</returns>
         public List<CargoItem> GetCargoItemsByPartialDescription(string description)
         {
-            //YOUR CODE HERE
+            //YOUR CODE HERE - Need a library for dealing with list
             throw new NotImplementedException();
         }
 
@@ -63,7 +67,7 @@
         /// <returns>An integer representing the sum of all Quantity properties on all CargoItems</returns>
         public int GetTotalNumberOfItems()
         {
-            //YOUR CODE HERE
+            //YOUR CODE HERE - more than meets the eye - Cargo items have a quantity
             throw new NotImplementedException();
         }
     }
