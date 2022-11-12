@@ -35,14 +35,28 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void LoadCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-
+            CargoItem cargoItem = new CargoItem
+                {
+                    Name = "Rosebud",
+                    Description = "Sled",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(cargoItem);
             //assert
-
+            semiTruck.Cargo.Should().HaveCount(1);
+            semiTruck.Cargo.Should().SatisfyRespectively(
+                first =>
+                {
+                    first.Name.Should().Be("Rosebud");
+                    first.Description.Should().Be("Sled");
+                    first.Quantity.Should().Be(2);
+                }
+            );
         }
 
-        //Verify that unloading a  cargo item that is in the Cargo does
+        //Verify that unloading a cargo item that is in the Cargo does
         //remove it from the Cargo and return the matching CargoItem
         [Fact]
         public void UnloadCargoWithValidCargoTest()
@@ -50,7 +64,7 @@ namespace CodeLouisvilleUnitTestProjectTests
             //arrange
             throw new NotImplementedException();
             //act
-
+            
             //assert
 
         }
