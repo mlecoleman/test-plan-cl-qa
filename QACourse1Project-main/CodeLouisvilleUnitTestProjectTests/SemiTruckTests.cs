@@ -15,11 +15,17 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void NewSemiTruckIsAVehicleAndHas18TiresAndEmptyCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
+
             //act
 
             //assert
-            
+            using (new AssertionScope())
+            {
+            semiTruck.NumberOfTires.Should().Be(18);
+            semiTruck.Cargo.Should().BeEmpty();
+            semiTruck.Should().BeAssignableTo<Vehicle>();
+            }
         }
 
         //Verify that adding a CargoItem using LoadCargo does successfully add
