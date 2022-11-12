@@ -166,10 +166,13 @@ namespace CodeLouisvilleUnitTestProjectTests
             vehicle.AddGas(gasToAdd);
 
             //assert
-            vehicle.Drive(miles).Should().Be(statusString);
-            vehicle.GasLevel.Should().Be(percentGasInTank);
-            vehicle.MilesRemaining.Should().Be(milesRemaining);
-            vehicle.Mileage.Should().Be(totalMileage);
+            using (new AssertionScope())
+            {
+                vehicle.Drive(miles).Should().Be(statusString);
+                vehicle.GasLevel.Should().Be(percentGasInTank);
+                vehicle.MilesRemaining.Should().Be(milesRemaining);
+                vehicle.Mileage.Should().Be(totalMileage);
+            }
         }
         //Verify that attempting to change a flat tire using
         //ChangeTireAsync will throw a NoTireToChangeException
