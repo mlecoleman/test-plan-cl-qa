@@ -80,8 +80,8 @@ namespace CodeLouisvilleUnitTestProject
         /// <returns>An integer representing the sum of all Quantity properties on all CargoItems</returns>
         public int GetTotalNumberOfItems()
         {
-            //YOUR CODE HERE - more than meets the eye - Cargo items have a quantity
-            throw new NotImplementedException();
+            int totalCargoItems = Cargo.Sum(CargoItem => CargoItem.Quantity);
+            return totalCargoItems;
         }
     }
 }

@@ -196,11 +196,24 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetTotalNumberOfItemsReturnsSumOfAllQuantities()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-
+            CargoItem boxOfPants = new CargoItem
+                {
+                    Name = "Box",
+                    Description = "Box of Pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfPants);
+            CargoItem boxOfNotPants = new CargoItem
+                {
+                    Name = "Not Pants",
+                    Description = "Who cares, it's not pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfNotPants);
             //assert
-
+            semiTruck.GetTotalNumberOfItems().Should().Be(2);
         }
     }
 }
