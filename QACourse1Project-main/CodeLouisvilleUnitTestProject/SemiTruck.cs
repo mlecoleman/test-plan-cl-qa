@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeLouisvilleUnitTestProject
 {
@@ -33,10 +34,18 @@ namespace CodeLouisvilleUnitTestProject
         /// <param name="name">The name of the CargoItem to attempt to remove</param>
         /// <returns>The removed CargoItem</returns>
         /// <exception cref="ArgumentException">Thrown if no CargoItem in the Cargo matches the passed name</exception>
-        public CargoItem UnloadCargo(string name)
+        public List<CargoItem> UnloadCargo(string name)
         {
-            /// Longest method
-            throw new NotImplementedException();
+            var cargoItemToRemove = Cargo.FirstOrDefault(CargoItem => CargoItem.Name == name);
+            if(cargoItemToRemove != null)
+            {
+                Cargo.Remove(cargoItemToRemove);
+            }
+            else
+            {
+                throw new NoCargoWithThatNameException();
+            }
+            return Cargo;
         }
 
         /// <summary>
