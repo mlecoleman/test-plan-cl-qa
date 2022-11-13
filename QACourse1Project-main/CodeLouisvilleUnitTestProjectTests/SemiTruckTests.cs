@@ -45,15 +45,18 @@ namespace CodeLouisvilleUnitTestProjectTests
                 };
             semiTruck.LoadCargo(cargoItem);
             //assert
+            using (new AssertionScope())
+            {
             semiTruck.Cargo.Should().HaveCount(1);
             semiTruck.Cargo.Should().SatisfyRespectively(
                 first =>
                 {
                     first.Name.Should().Be("Rosebud");
                     first.Description.Should().Be("Sled");
-                    first.Quantity.Should().Be(2);
+                    first.Quantity.Should().Be(1);
                 }
             );
+            }
         }
 
         //Verify that unloading a cargo item that is in the Cargo does
@@ -62,11 +65,36 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void UnloadCargoWithValidCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-            
+            CargoItem boxOfPants = new CargoItem
+                {
+                    Name = "Box",
+                    Description = "Box of Pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfPants);
+            CargoItem boxOfNotPants = new CargoItem
+                {
+                    Name = "Box of Not Pants",
+                    Description = "Who cares, it's not pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfNotPants);
+            semiTruck.UnloadCargo("Box of Not Pants");
             //assert
-
+            using (new AssertionScope())
+            {
+            semiTruck.Cargo.Should().HaveCount(1);
+            semiTruck.Cargo.Should().SatisfyRespectively(
+                first =>
+                {
+                    first.Name.Should().Be("Box");
+                    first.Description.Should().Be("Box of Pants");
+                    first.Quantity.Should().Be(1);
+                }
+            );
+            }
         }
 
         //Verify that attempting to unload a CargoItem that does not
