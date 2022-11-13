@@ -14,4 +14,11 @@
             : base($"No flat tire to change")
         { }
     }
+
+    public class NoCargoWithThatNameException : Exception
+    {
+        public NoCargoWithThatNameException()
+            : base($"Sorry bub. You got the wrong truck!")
+        { }
+    }
 }
