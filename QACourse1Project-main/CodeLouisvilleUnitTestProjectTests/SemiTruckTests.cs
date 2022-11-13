@@ -103,10 +103,19 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void UnloadCargoWithInvalidCargoTest()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-
+             CargoItem boxOfPants = new CargoItem
+                {
+                    Name = "Box",
+                    Description = "Box of Pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfPants);
+            Action action = () => semiTruck.UnloadCargo("Box of Not Pants");
             //assert
+            action.Should().Throw<NoCargoWithThatNameException>()
+                  .WithMessage("Sorry bub. You got the wrong truck!");
 
         }
 
