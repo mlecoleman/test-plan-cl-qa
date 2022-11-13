@@ -125,24 +125,37 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetCargoItemsByNameWithValidName()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-
+            CargoItem boxOfPants = new CargoItem
+                {
+                    Name = "Box",
+                    Description = "Box of Pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfPants);
+            CargoItem boxOfNotPants = new CargoItem
+                {
+                    Name = "Not Pants",
+                    Description = "Who cares, it's not pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfNotPants);
             //assert
-
+            semiTruck.GetCargoItemsByName("Not Pants").Should().Equal(boxOfNotPants);
         }
 
-        //Verify that searching the Carto list for an item that does not
+        //Verify that searching the Cargo list for an item that does not
         //exist returns an empty list
         [Fact]
         public void GetCargoItemsByNameWithInvalidName()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
 
             //assert
-
+            semiTruck.GetCargoItemsByName("Not Pants").Should().Equal();
         }
 
         //Verify that searching the Cargo list by description for an item
@@ -151,24 +164,30 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetCargoItemsByPartialDescriptionWithValidDescription()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
-
+            CargoItem boxOfNotPants = new CargoItem
+                {
+                    Name = "Not Pants",
+                    Description = "Who cares, it's not pants",
+                    Quantity = 1
+                };
+            semiTruck.LoadCargo(boxOfNotPants);
             //assert
-
+            semiTruck.GetCargoItemsByPartialDescription("Who cares").Should().Equal(boxOfNotPants);
         }
 
-        //Verify that searching the Carto list by description for an item
+        //Verify that searching the Cargo list by description for an item
         //that does not exist returns an empty list
         [Fact]
         public void GetCargoItemsByPartialDescriptionWithInvalidDescription()
         {
             //arrange
-            throw new NotImplementedException();
+            SemiTruck semiTruck = new SemiTruck();
             //act
 
             //assert
-
+            semiTruck.GetCargoItemsByPartialDescription("Who cares").Should().Equal();
         }
 
         //Verify that the method returns the sum of all quantities of all
