@@ -55,8 +55,10 @@ namespace CodeLouisvilleUnitTestProject
         /// <returns>A List of CargoItems with the exact name passed</returns>
         public List<CargoItem> GetCargoItemsByName(string name)
         {
-            //YOUR CODE HERE Need a library for dealing with list
-            throw new NotImplementedException();
+            List<CargoItem> queryNames = new();
+            queryNames = Cargo.Where(CargoItem => CargoItem.Name == name).ToList();
+
+            return queryNames;
         }
 
         /// <summary>
@@ -66,8 +68,10 @@ namespace CodeLouisvilleUnitTestProject
         /// <returns>A List of CargoItems with a description containing the passed description</returns>
         public List<CargoItem> GetCargoItemsByPartialDescription(string description)
         {
-            //YOUR CODE HERE - Need a library for dealing with list
-            throw new NotImplementedException();
+            List<CargoItem> queryDescription = new();
+            queryDescription = Cargo.Where(CargoItem => CargoItem.Description.Contains(description)).ToList();
+
+            return queryDescription;
         }
 
         /// <summary>
