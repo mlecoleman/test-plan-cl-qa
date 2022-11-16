@@ -59,9 +59,11 @@ namespace CodeLouisvilleUnitTestProject
                 MilesPerGallon = MilesPerGallon + (numOfPassengersToRemove * 0.2);
                 MilesPerGallon = Math.Round(MilesPerGallon, 1);
             }
-            else if (NumberOfPassengers < numOfPassengersToRemove)
+            else if (NumberOfPassengers <= numOfPassengersToRemove)
             {
+                MilesPerGallon = MilesPerGallon + (NumberOfPassengers * 0.2);
                 NumberOfPassengers = 0;
+                MilesPerGallon = Math.Round(MilesPerGallon, 1);
             }
         }
     }

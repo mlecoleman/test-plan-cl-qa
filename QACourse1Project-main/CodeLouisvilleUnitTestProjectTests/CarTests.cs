@@ -44,20 +44,18 @@ namespace CodeLouisvilleUnitTestProjectTests
         [InlineData(2, 0, 9.6)]
         [InlineData(0, 0, 10)]
         [InlineData(2, 1, 9.8)]
-        public void VerifyEachPassengerReducesGasMileage(int passengersToAdd, int passengersToRemove, double expectedGasMileage)
+        public void VerifyEachPassengerReducesGasMileage(int numOfPassengersToAdd, int numOfPassengersToRemove, double expectedGasMileage)
         {
             //arrange
             Car car = new Car(10, "carmake", "carmodel", 10);
 
             //act
-            car.AddPassengers(passengersToAdd);
-            car.RemovePassengers(passengersToRemove);
+            car.AddPassengers(numOfPassengersToAdd);
+            car.RemovePassengers(numOfPassengersToRemove);
             
             //assert
-            using (new AssertionScope())
-            {
-                car.MilesPerGallon.Should().Be(expectedGasMileage);
-            }
+            car.MilesPerGallon.Should().Be(expectedGasMileage);
+            
         }
         //RemovePassengers test: Using a Theory, test the following:
         // -Create a Car with 5 passengers that gets 21 MPG. Remove 3 passengers from the car. Verify the car now has 2 passengers and gets 20.6 MPG.
