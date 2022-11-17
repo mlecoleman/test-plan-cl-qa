@@ -83,17 +83,18 @@
 
 ### Clicking on column header does not sort titles correctly
 
-Date of test: 11/1/22
-Tester: E Coleman
-Web page under test: https://demoqa.com/books
-Test device: MacBook Pro running Monterey 12.1 with Apple M1 chip
-Browser: Chrome Version 107.0.5304.110 (Official Build) (arm64)
+Date of test: 11/1/22 <br/>
+Tester: E Coleman <br/>
+Web page under test: https://demoqa.com/books <br/>
+Test device: MacBook Pro running Monterey 12.1 with Apple M1 chip <br/>
+Browser: Chrome Version 107.0.5304.110 (Official Build) (arm64) <br/>
+
 
 How to recreate bug:
 1. Go to https://demoqa.com/books
 2. Click on "Title" header at the top of the Title column directly under the search bar
 3. Expected behavior:
-	1. Titles should sort alphabetically from A-Z on first click and reverse to sorting Z-A on 2nd       click
+	1. Titles should sort alphabetically from A-Z on first click and reverse to sorting Z-A on 2nd click
 4. Actual behavior:
-	1. Titles do shuffle on click but the do not sort alphabetically
+	1. Titles do shuffle on click but they do not sort alphabetically
 
