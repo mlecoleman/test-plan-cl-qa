@@ -210,20 +210,32 @@ namespace CodeLouisvilleUnitTestProjectTests
             }
         }
 
-        //BONUS: Write a unit test that verifies that a flat
-        //tire will occur after a certain number of miles.
-        // [Theory]
-        // [InlineData(99, 8)]
-        // public void GetFlatTireAfterCertainNumberOfMilesTest(double milesToDrive, int rngSeed)
-        // {
-        //     //arrange
-        //     Vehicle coupeUtilityVehicle = new Vehicle (4, 100, "Chevrolet", "El Camino", 1);
-        //     //act
-        //     coupeUtilityVehicle.AddGas();
-        //     coupeUtilityVehicle.Drive(milesToDrive);
-        //     bool flatTire = coupeUtilityVehicle.GotFlatTire(milesToDrive, rngSeed);
-        //     //assert
-        //     flatTire.Should().Be(true);
-        // }
+        /*
+        BONUS: Write a unit test that verifies that a flat
+        tire will occur after a certain number of miles.
+        BONUS: Refactor the GotFlatTire method to make it unit-testable. Write a theory unit test with two cases that verifies that GotFlatTire can be both true and false. This will require you to pass a value for the optional parameter in this method. If you do not attempt this bonus, you may leave GotFlatTire alone.
+
+        */
+        [Theory]
+        [InlineData(99, 8, 0)]
+        [InlineData(99, 8, 1)]
+        public void GetFlatTireAfterCertainNumberOfMilesTest(double milesToDrive, int rngSeed, int tires)
+        {
+            //arrange
+            Vehicle coupeUtilityVehicle = new Vehicle (tires, 100, "Chevrolet", "El Camino", 1);
+            //act
+            coupeUtilityVehicle.AddGas();
+            coupeUtilityVehicle.Drive(milesToDrive);
+            bool flatTire = coupeUtilityVehicle.GotFlatTire(milesToDrive, rngSeed);
+            //assert
+            if (tires == 0)
+            {
+                flatTire.Should().Be(false);
+            }
+            else if (tires == 4)
+            {
+                flatTire.Should().Be(true);
+            }
+        }
     }
 }
