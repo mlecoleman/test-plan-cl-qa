@@ -1,50 +1,60 @@
+using System.Text.Json;
+using System.Linq;
+
 namespace CodeLouisvilleUnitTestProject
 {
     public class Car : Vehicle
     {
         public int NumberOfPassengers { get; private set; }
-        string baseUrl = "https://vpic.nhtsa.dot.gov/api/";
-        private HttpClient client;
-        // Client.BaseAddress = new Uri(baseUrl);
-
-
+        public int Numberoftires = 4;
+        private HttpClient _client;
         public Car()
             : this (0, "", "", 0)
         { 
-            NumberOfTires = 4;
         }
-
         public Car(double gasTankCapacity, string make, string model, double milesPerGallon)
         {
-            NumberOfTires = 4;
             GasTankCapacity = gasTankCapacity;
             Make = make;
             Model = model;
             MilesPerGallon = milesPerGallon;
-            client = new HttpClient();
+            _client = new HttpClient()
+            {
+                BaseAddress = new Uri("https://vpic.nhtsa.dot.gov/api/")
+            };
         }
         // Car has a method called IsValidModelForMakeAsync. This method is async and returns a type of Task<bool>. This method has no parameters. The method reaches out to the National Highway Traffic Safety Administration (NHTSA) API via the private HttpClient to determine whether or not the Car’s provided Model is actually a real Model for its Make. If the Model is valid, it returns true. If the Model is not valid, it returns false. You are responsible for determining how best to accomplish this by reading the provided documentation for that API.
         // Example: Calling this method on a Car with Make = “Honda” and Model = “Civic” should return true. 
         // Example: Calling this method on a Car with Make = “Honda” and Model = “Camry” should return false.
         // Hint: It is STRONGLY recommended that you use json and deserialize the response of your API call into a strongly-typed C# object. This may require creating additional classes.
 
-        // public async Task<bool> IsValidModelForMakeAsync()
-        // {
-        //     var response = await client.GetAsync(Make, Model);
-        //     var content = response.Content.ReadAsStringA sync();
-        //     var options = new System.Text.Json.JsonSerializerOptions
-        //     {
-        //         PropertyNameCaseInsensitive = true
-        //     };
-        //     var carInfoList = System.Text.Json.JsonSerializer.Deserialize<List<CarStuff>>(content)>>(content, options);
-        //     var carInfo = carInfoList.FirstOrDefault();
-            
-        //     using HttpResponseMessage response = await client.GetAsync("https://vpic.nhtsa.dot.gov/api/");
-        //     response.EnsureSuccessStatusCode();
-        //     string responseBody = await response.Content.ReadAsStringAsync();
-        //     return 
-            
-        // } 
+        public async Task<bool> IsValidModelForMakeAsync()
+        {
+            string urlSuffix = $"vehicles/GetModelsForMake/{Make}?format=json";
+            var response = await _client.GetAsync(urlSuffix);
+            var rawJson = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<GetModelsForMakeYearResponseModel>(rawJson);
+            var wasThereARecord = data.Results.FirstOrDefault(r => r.Model_Name == Model);
+            if (wasThereARecord == null)
+                return false;
+            else return true;
+        } 
+
+        public async Task<bool> WasModelMadeInYearAsync(int year)
+        {
+            if(year < 1995)
+            {
+                throw new Before1995Exception();
+            }
+            string urlSuffix = $"vehicles/getmodelsformakeyear/make/{Make}/modelyear/{year}?format=json";
+            var response = await _client.GetAsync(urlSuffix);
+            var rawJson = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<GetModelsForMakeYearResponseModel>(rawJson);
+            var wasThereARecord = data.Results.FirstOrDefault(r => r.Model_Name == Model);
+            if (wasThereARecord == null)
+                return false;
+            else return true;
+        }
         public void AddPassengers(int numOfPassengersToAdd)
         {
             NumberOfPassengers = NumberOfPassengers + numOfPassengersToAdd;
