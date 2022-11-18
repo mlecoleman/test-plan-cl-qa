@@ -214,7 +214,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GetFlatTireAfterCertainNumberOfMilesTest(params object[] yourParamsHere)
         {
             //arrange
-            throw new NotImplementedException();
+            
             //act
 
             //assert

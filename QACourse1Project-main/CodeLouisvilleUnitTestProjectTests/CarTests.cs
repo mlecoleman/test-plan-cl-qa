@@ -77,10 +77,9 @@ namespace CodeLouisvilleUnitTestProjectTests
             //act
             car.AddPassengers(numOfPassengersToAdd);
             car.RemovePassengers(numOfPassengersToRemove);
-            
+
             //assert
             car.MilesPerGallon.Should().Be(expectedGasMileage);
-            
         }
         //RemovePassengers test: Using a Theory, test the following:
         // -Create a Car with 5 passengers that gets 21 MPG. Remove 3 passengers from the car. Verify the car now has 2 passengers and gets 20.6 MPG.
