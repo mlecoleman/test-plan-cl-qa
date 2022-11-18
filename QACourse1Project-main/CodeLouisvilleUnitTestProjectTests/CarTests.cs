@@ -26,18 +26,43 @@ namespace CodeLouisvilleUnitTestProjectTests
         }
         // IsValidModelForMakeAsync test: Test that a Make of Honda and a Model of Civic is valid. Test that a Make of Honda and a Model of Camry is not. You may use two Facts or one Theory for this test.
         [Theory]
-        [InlineData("Honda", "Civic")]
-        [InlineData("Honda", "Camry")]
-        public void IsValidModelForMakeAsync(string carmake, string carmodel)
+        [InlineData("Honda", "Civic", true)]
+        [InlineData("Honda", "Camry", false)]
+        public async Task IsValidModelForMakeAsync(string carmake, string carmodel, bool makemodel)
         {
             //Arrange
             Car car = new Car(0, carmake, carmodel, 0);
             
             //assert
-            using (new AssertionScope())
-            {
-            
-            }
+            bool validMakeModel = await car.IsValidModelForMakeAsync();
+            validMakeModel.Should().Be(makemodel);
+        }
+        [Fact]
+        public async Task WasModelMadeInYearAsyncNegativeTest()
+        {
+            //arrange
+            Car car = new Car(0, "pants", "pants", 0);
+
+            //act
+            //assert
+            Func<Task> act = async () => { await car.WasModelMadeInYearAsync(1988); };
+            await act.Should().ThrowAsync<Before1995Exception>();
+        }
+        [Theory]
+        [InlineData("Pants", "Accord", 2000, false)]
+        [InlineData("Honda", "Camry", 2000, false)]
+        [InlineData("Subaru", "WRX", 2020, true)]
+        [InlineData("Subaru", "WRX", 2000, false)]
+        public async Task WasModelMadeInYearAsyncPositiveTest(string carmake, string carmodel, int year, bool after1995)
+        {
+            //Arrange
+            Car car = new Car(0, carmake, carmodel, 0);
+
+            //Act
+            bool validMakeModel = await car.WasModelMadeInYearAsync(year);
+
+            //Assert
+            validMakeModel.Should().Be(after1995);
         }
         // AddPassengers test: Test that adding passengers to the car reduces the fuel economy of the car by .2 per passenger. Test that removing the passengers then adds back the fuel economy.
         [Theory]
