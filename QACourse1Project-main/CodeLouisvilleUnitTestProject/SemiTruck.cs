@@ -9,7 +9,6 @@ namespace CodeLouisvilleUnitTestProject
     {
         public List<CargoItem> Cargo { get; private set; }
 
-
         /// <summary>
         /// Creates a new SemiTruck that always has 18 Tires
         /// </summary>

@@ -124,7 +124,7 @@
         /// </summary>
         /// <param name="milesDriven"></param>
         /// <returns></returns>
-        private bool GotFlatTire(double milesDriven, int rngSeed = 0)
+        public bool GotFlatTire(double milesDriven, int rngSeed = 0)
         {
             double probabilityOfFlatPerMile = 1 - _flatTireChance;
             double probPerMile = Math.Pow(probabilityOfFlatPerMile, milesDriven);

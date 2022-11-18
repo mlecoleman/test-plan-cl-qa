@@ -6,7 +6,6 @@ namespace CodeLouisvilleUnitTestProjectTests
 {
     public class SemiTruckTests
     {
-
         //Verify that the SemiTruck constructor creates a new SemiTruck
         //object which is also a Vehicle and has 18 wheels. Verify that the
         //Cargo property for the newly created SemiTruck is a List of
@@ -36,6 +35,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
             CargoItem cargoItem = new CargoItem
                 {
@@ -44,6 +44,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                     Quantity = 1
                 };
             semiTruck.LoadCargo(cargoItem);
+
             //assert
             using (new AssertionScope())
             {
@@ -66,6 +67,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
             CargoItem boxOfPants = new CargoItem
                 {
@@ -82,6 +84,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                 };
             semiTruck.LoadCargo(boxOfNotPants);
             semiTruck.UnloadCargo("Box of Not Pants");
+
             //assert
             using (new AssertionScope())
             {
@@ -104,6 +107,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
              CargoItem boxOfPants = new CargoItem
                 {
@@ -113,6 +117,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                 };
             semiTruck.LoadCargo(boxOfPants);
             Action action = () => semiTruck.UnloadCargo("Box of Not Pants");
+
             //assert
             action.Should().Throw<NoCargoWithThatNameException>()
                   .WithMessage("Sorry bub. You got the wrong truck!");
@@ -126,6 +131,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
             CargoItem boxOfPants = new CargoItem
                 {
@@ -141,6 +147,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                     Quantity = 1
                 };
             semiTruck.LoadCargo(boxOfNotPants);
+
             //assert
             semiTruck.GetCargoItemsByName("Not Pants").Should().Equal(boxOfNotPants);
         }
@@ -152,6 +159,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
 
             //assert
@@ -165,6 +173,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
             CargoItem boxOfNotPants = new CargoItem
                 {
@@ -173,6 +182,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                     Quantity = 1
                 };
             semiTruck.LoadCargo(boxOfNotPants);
+            
             //assert
             semiTruck.GetCargoItemsByPartialDescription("Who cares").Should().Equal(boxOfNotPants);
         }
@@ -184,10 +194,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
 
             //assert
-            semiTruck.GetCargoItemsByPartialDescription("Who cares").Should().Equal();
+            semiTruck.GetCargoItemsByPartialDescription("I saw a huge traffic jam involving several semi trucks - It was a big rigamarole").Should().Equal();
         }
 
         //Verify that the method returns the sum of all quantities of all
@@ -197,6 +208,7 @@ namespace CodeLouisvilleUnitTestProjectTests
         {
             //arrange
             SemiTruck semiTruck = new SemiTruck();
+
             //act
             CargoItem boxOfPants = new CargoItem
                 {
@@ -212,6 +224,7 @@ namespace CodeLouisvilleUnitTestProjectTests
                     Quantity = 1
                 };
             semiTruck.LoadCargo(boxOfNotPants);
+
             //assert
             semiTruck.GetTotalNumberOfItems().Should().Be(2);
         }

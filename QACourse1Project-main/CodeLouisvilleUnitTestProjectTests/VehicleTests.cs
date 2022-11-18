@@ -1,13 +1,11 @@
 using CodeLouisvilleUnitTestProject;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Xunit.Abstractions;
 
 namespace CodeLouisvilleUnitTestProjectTests
 {
     public class VehicleTests
     {
-
         //Verify the parameterless constructor successfully creates a new
         //object of type Vehicle, and instantiates all public properties
         //to their default values.
@@ -15,17 +13,18 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleParameterlessConstructorTest()
         {
             //arrange
+            Vehicle weinermobile = new Vehicle();
+
             //act
-            Vehicle vehicle = new Vehicle();
             
             //assert
             using (new AssertionScope())
             {
-            vehicle.NumberOfTires.Should().Be(0);
-            vehicle.GasTankCapacity.Should().Be(0);
-            vehicle.Make.Should().Be("");
-            vehicle.Model.Should().Be("");
-            vehicle.MilesPerGallon.Should().Be(0);
+            weinermobile.NumberOfTires.Should().Be(0);
+            weinermobile.GasTankCapacity.Should().Be(0);
+            weinermobile.Make.Should().Be("");
+            weinermobile.Model.Should().Be("");
+            weinermobile.MilesPerGallon.Should().Be(0);
             }
         }
 
@@ -36,8 +35,9 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void VehicleConstructorTest()
         {
             //arrange
-            //act
             Vehicle tricycle = new Vehicle(3, 0, "Radio", "Flyer", 0);
+
+            //act
 
             //assert
             using (new AssertionScope())
@@ -109,13 +109,13 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void GasLevelPercentageIsCorrectForAmountOfGas(string percentGasInTank, float gasToAdd)
         {
             //arrange
-            Vehicle vehicle = new Vehicle (4, 10, "Toyota", "Camry", 30);
+            Vehicle chittychittybangbang = new Vehicle (4, 10, "Chitty prime", "GEN 11", 30);
 
             //act
-            vehicle.AddGas(gasToAdd);
+            chittychittybangbang.AddGas(gasToAdd);
 
             //assert
-            vehicle.GasLevel.Should().Be(percentGasInTank);
+            chittychittybangbang.GasLevel.Should().Be(percentGasInTank);
         }
 
         /*
@@ -146,12 +146,12 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void DriveNegativeTests(double miles, float gasToAdd, string statusString, bool HasFlatTire)
         {
             //arrange
-            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
-            vehicle.AddGas(gasToAdd);
-            vehicle.HasFlatTire = true;
+            Vehicle clownCar = new Vehicle (4, 100, "Lou", "Jacobs", 1);
+            clownCar.AddGas(gasToAdd);
+            clownCar.HasFlatTire = true;
 
             //assert
-            vehicle.Drive(miles).Should().Be(statusString);
+            clownCar.Drive(miles).Should().Be(statusString);
             
         }
         [Theory]
@@ -160,18 +160,18 @@ namespace CodeLouisvilleUnitTestProjectTests
         public void DrivePositiveTests(double miles, float gasToAdd, string statusString, string percentGasInTank, double milesRemaining, double totalMileage)
         {
             //arrange
-            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
+            Vehicle mcFlysCar = new Vehicle (4, 100, "DeLorean", "Time Machine", 1);
 
             //act
-            vehicle.AddGas(gasToAdd);
+            mcFlysCar.AddGas(gasToAdd);
 
             //assert
             using (new AssertionScope())
             {
-                vehicle.Drive(miles).Should().Be(statusString);
-                vehicle.GasLevel.Should().Be(percentGasInTank);
-                vehicle.MilesRemaining.Should().Be(milesRemaining);
-                vehicle.Mileage.Should().Be(totalMileage);
+                mcFlysCar.Drive(miles).Should().Be(statusString);
+                mcFlysCar.GasLevel.Should().Be(percentGasInTank);
+                mcFlysCar.MilesRemaining.Should().Be(milesRemaining);
+                mcFlysCar.Mileage.Should().Be(totalMileage);
             }
         }
         //Verify that attempting to change a flat tire using
@@ -181,11 +181,11 @@ namespace CodeLouisvilleUnitTestProjectTests
         public async Task ChangeTireWithoutFlatTest()
         {
             //arrange
-            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
+            Vehicle batMobile = new Vehicle (4, 100, "Lincoln", "Futura", 1);
         
             //act
             //assert
-            Func<Task> act = async () => { await vehicle.ChangeTireAsync(); };
+            Func<Task> act = async () => { await batMobile.ChangeTireAsync(); };
             await act.Should().ThrowAsync<NoTireToChangeException>()
                      .WithMessage("No flat tire to change");
         }
@@ -196,29 +196,34 @@ namespace CodeLouisvilleUnitTestProjectTests
         public async Task ChangeTireSuccessfulTest()
         {
             //arrange
-            Vehicle vehicle = new Vehicle (4, 100, "Toyota", "Camry", 1);
-            vehicle.HasFlatTire = true;
+            Vehicle boatCar = new Vehicle (4, 100, "Amphicar", "Model 770", 1);
+            boatCar.HasFlatTire = true;
             
             //act
-            Func<Task> act = async () => { await vehicle.ChangeTireAsync(); };
+            Func<Task> act = async () => { await boatCar.ChangeTireAsync(); };
 
             //assert
+            using (new AssertionScope())
+            {
             await act.Should().NotThrowAsync();
-            vehicle.HasFlatTire.Should().Be(false);
+            boatCar.HasFlatTire.Should().Be(false);
+            }
         }
 
         //BONUS: Write a unit test that verifies that a flat
         //tire will occur after a certain number of miles.
-        [Theory]
-        [InlineData("MysteryParamValue")]
-        public void GetFlatTireAfterCertainNumberOfMilesTest(params object[] yourParamsHere)
-        {
-            //arrange
-            
-            //act
-
-            //assert
-
-        }
+        // [Theory]
+        // [InlineData(99, 8)]
+        // public void GetFlatTireAfterCertainNumberOfMilesTest(double milesToDrive, int rngSeed)
+        // {
+        //     //arrange
+        //     Vehicle coupeUtilityVehicle = new Vehicle (4, 100, "Chevrolet", "El Camino", 1);
+        //     //act
+        //     coupeUtilityVehicle.AddGas();
+        //     coupeUtilityVehicle.Drive(milesToDrive);
+        //     bool flatTire = coupeUtilityVehicle.GotFlatTire(milesToDrive, rngSeed);
+        //     //assert
+        //     flatTire.Should().Be(true);
+        // }
     }
 }
