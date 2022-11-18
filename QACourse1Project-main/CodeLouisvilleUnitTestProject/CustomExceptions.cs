@@ -21,4 +21,11 @@
             : base($"Sorry bub. You got the wrong truck!")
         { }
     }
+
+    public class Before1995Exception : Exception
+    {
+        public Before1995Exception()
+            : base($"OMG go back to pre 1995 ya geezer - No Data Available for years prior to 1995!")
+        { }
+    }
 }
